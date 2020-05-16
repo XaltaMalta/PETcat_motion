@@ -9,6 +9,7 @@
 		backLeft;
 		body;
         com;
+        zero_angle;
 	end
 	methods
 		function obj= Billi(body_obj,l1,l2)%body frame and length of links
@@ -66,19 +67,19 @@
 			obj.frontRight.endPoint=fr;
 			obj.frontLeft.endPoint= fl;
 			obj.backRight.endPoint= br;
-			obj.backLeft.endPoint= bl
+			obj.backLeft.endPoint= bl;
             %%zero_angle is the orientation of billi's body%%
-            zero_angle = acos(obj.body.orient(1,1));
+            obj.zero_angle = acos(obj.body.orient(1,1));
             sine = -obj.body.orient(1,2);
             if sine<0
-                zero_angle = 2*pi-zero_angle;
+                obj.zero_angle = 2*pi-obj.zero_angle;
             end
-            [~, obj.frontRight.joint, ~]=findleg(obj.frontRight.startPoint(1:3,1),obj.frontRight.endPoint,obj.frontRight.l1,obj.frontRight.l2,zero_angle);
-			[~, obj.frontLeft.joint, ~]= findleg(obj.frontLeft.startPoint(1:3,1),obj.frontLeft.endPoint,obj.frontLeft.l1,obj.frontLeft.l2,zero_angle);
-			[~, obj.backRight.joint, ~]= findleg(obj.backRight.startPoint(1:3,1),obj.backRight.endPoint,obj.backRight.l1,obj.backRight.l2,zero_angle-pi);
-			[~, obj.backLeft.joint, ~]= findleg(obj.backLeft.startPoint(1:3,1),obj.backLeft.endPoint,obj.backLeft.l1,obj.backLeft.l2,zero_angle-pi);
+            [~, obj.frontRight.joint, ~]=findleg(obj.frontRight.startPoint(1:3,1),obj.frontRight.endPoint,obj.frontRight.l1,obj.frontRight.l2,obj.zero_angle);
+			[~, obj.frontLeft.joint, ~]= findleg(obj.frontLeft.startPoint(1:3,1),obj.frontLeft.endPoint,obj.frontLeft.l1,obj.frontLeft.l2,obj.zero_angle);
+			[~, obj.backRight.joint, ~]= findleg(obj.backRight.startPoint(1:3,1),obj.backRight.endPoint,obj.backRight.l1,obj.backRight.l2,obj.zero_angle-pi);
+			[~, obj.backLeft.joint, ~]= findleg(obj.backLeft.startPoint(1:3,1),obj.backLeft.endPoint,obj.backLeft.l1,obj.backLeft.l2,obj.zero_angle-pi);
             obj.com = obj.body.orient(1:3, 4);
-            
+     
     	end
 	end
 end

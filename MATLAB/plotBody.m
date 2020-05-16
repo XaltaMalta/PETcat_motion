@@ -86,10 +86,10 @@ function [] = plotBody(billi, h ,detailed)
             plotPoints(b);
             plotPoints(CoM);
             plotPoints([CoM(1); CoM(2); 0]);
-            axis([-10 + CoM(1), 10 + CoM(1), -10, 10, 0 , 10])
+            axis([-10 + CoM(1), 10 + CoM(1), -10 + CoM(2), 10 + CoM(2), 0 , 10])
             grid on 
             pbaspect([2 2 1])
-            view([-10 5 5])
+            view([0 0 1])
     end
 end
 
